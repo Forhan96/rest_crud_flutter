@@ -112,7 +112,7 @@ class RegisterView extends GetView<RegisterController> with InputValidationMixin
                       height: 16.h,
                     ),
                     TextInput(
-                      controller: passwordController,
+                      controller: confirmPasswordController,
                       hintText: "Confirm Password",
                       validator: (password) {
                         if (isNotEmpty(password ?? "")) {
@@ -131,7 +131,7 @@ class RegisterView extends GetView<RegisterController> with InputValidationMixin
                         if (!formKey.currentState!.validate()) {
                           return;
                         }
-                        Get.toNamed(Routes.HOME);
+                        Get.offNamedUntil(Routes.HOME, (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
@@ -165,7 +165,7 @@ class RegisterView extends GetView<RegisterController> with InputValidationMixin
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.toNamed(Routes.LOGIN);
+                          Get.offAndToNamed(Routes.LOGIN);
                         },
                       text: "Login",
                       style: GoogleFonts.alexandria(
