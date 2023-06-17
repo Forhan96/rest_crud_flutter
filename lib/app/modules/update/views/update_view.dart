@@ -7,6 +7,7 @@ import 'package:rest_crud_flutter/app/routes/app_pages.dart';
 import 'package:rest_crud_flutter/app/utils/color_const.dart';
 import 'package:rest_crud_flutter/app/utils/input_validator.dart';
 import 'package:rest_crud_flutter/app/widgets/TextInput.dart';
+import 'package:rest_crud_flutter/app/widgets/phone_input.dart';
 
 import '../controllers/update_controller.dart';
 
@@ -16,6 +17,7 @@ class UpdateView extends GetView<UpdateController> with InputValidationMixin {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     TextEditingController nameController = TextEditingController();
+    TextEditingController countryCodeController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
     TextEditingController emailController = TextEditingController();
 
@@ -46,15 +48,10 @@ class UpdateView extends GetView<UpdateController> with InputValidationMixin {
                 SizedBox(
                   height: 16.h,
                 ),
-                TextInput(
-                  controller: phoneController,
-                  hintText: "Phone Number",
-                  validator: (phone) {
-                    if (isNotEmpty(phone ?? "")) {
-                      return null;
-                    } else {
-                      return 'Enter a valid phone number';
-                    }
+                PhoneInput(
+                  onChanged: (phone) {
+                    countryCodeController.text = phone.countryCode;
+                    phoneController.text = phone.number;
                   },
                 ),
                 SizedBox(
