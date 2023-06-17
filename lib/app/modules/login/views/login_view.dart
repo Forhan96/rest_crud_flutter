@@ -83,6 +83,7 @@ class LoginView extends GetView<LoginController> with InputValidationMixin {
                         if (!formKey.currentState!.validate()) {
                           return;
                         }
+                        controller.login();
                         Get.offNamedUntil(Routes.HOME, (route) => false);
                       },
                       style: ElevatedButton.styleFrom(

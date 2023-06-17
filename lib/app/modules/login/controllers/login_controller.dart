@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  final _box = Get.find<GetStorage>();
 
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  void login() {
+    _box.write("loggedIn", true);
+    print(_box.read("loggedIn"));
+  }
 }

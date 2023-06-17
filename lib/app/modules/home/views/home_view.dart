@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rest_crud_flutter/app/routes/app_pages.dart';
 import 'package:rest_crud_flutter/app/utils/color_const.dart';
+import 'package:rest_crud_flutter/app/widgets/setting_card.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -31,16 +33,24 @@ class HomeView extends GetView<HomeController> {
               height: 12.h,
             ),
             SettingCard(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(Routes.UPDATE);
+              },
               title: "Update Information",
             ),
             SettingCard(
               onTap: () {},
-              title: "Update Information",
+              title: "Change Password",
             ),
             SettingCard(
               onTap: () {},
-              title: "Update Information",
+              title: "Delete Account",
+            ),
+            SettingCard(
+              onTap: () {
+                controller.logOut();
+              },
+              title: "Logout",
             ),
           ],
         ),
@@ -68,56 +78,6 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SettingCard extends StatelessWidget {
-  const SettingCard({
-    super.key,
-    this.onTap,
-    required this.title,
-  });
-  final Function? onTap;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTap?.call();
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
-        margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.seconderyColor.withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 15,
-                offset: const Offset(0, 15),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(5)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: GoogleFonts.alexandria(
-                color: AppColors.seconderyColor,
-                fontSize: 16,
-              ),
-            ),
-            const Icon(
-              Icons.chevron_right,
-              color: AppColors.primaryColor,
-            ),
-          ],
-        ),
       ),
     );
   }
