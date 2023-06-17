@@ -67,7 +67,7 @@ class LoginView extends GetView<LoginController> with InputValidationMixin {
                       controller: passwordController,
                       hintText: "Password",
                       validator: (password) {
-                        if (isNotEmpty(password ?? "")) {
+                        if (isPasswordValid(password ?? "")) {
                           return null;
                         } else {
                           return 'Use uppercase, lowecase, digits & special characters';
@@ -80,7 +80,10 @@ class LoginView extends GetView<LoginController> with InputValidationMixin {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        formKey.currentState?.validate();
+                        if (!formKey.currentState!.validate()) {
+                          return;
+                        }
+                        Get.offNamedUntil(Routes.HOME, (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
@@ -114,7 +117,7 @@ class LoginView extends GetView<LoginController> with InputValidationMixin {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.toNamed(Routes.REGISTER);
+                          Get.offAndToNamed(Routes.REGISTER);
                         },
                       text: "Register",
                       style: GoogleFonts.alexandria(
