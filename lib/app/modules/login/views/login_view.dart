@@ -9,6 +9,7 @@ import 'package:rest_crud_flutter/app/utils/color_const.dart';
 import 'package:rest_crud_flutter/app/utils/image_const.dart';
 import 'package:rest_crud_flutter/app/utils/input_validator.dart';
 import 'package:rest_crud_flutter/app/widgets/TextInput.dart';
+import 'package:rest_crud_flutter/app/widgets/phone_input.dart';
 
 import '../controllers/login_controller.dart';
 
