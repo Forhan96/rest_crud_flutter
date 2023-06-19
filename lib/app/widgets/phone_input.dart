@@ -8,6 +8,7 @@ class PhoneInput extends StatelessWidget {
   const PhoneInput({
     super.key,
     this.controller,
+    this.initialValue,
     this.label,
     this.hintText,
     this.validator,
@@ -15,6 +16,8 @@ class PhoneInput extends StatelessWidget {
   });
 
   final TextEditingController? controller;
+  final String? initialValue;
+
   final String? label;
   final String? hintText;
   final String? Function(String?)? validator;
@@ -23,6 +26,7 @@ class PhoneInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         fillColor: Theme.of(context).canvasColor,
@@ -63,6 +67,7 @@ class PhoneInput extends StatelessWidget {
         counterText: "",
       ),
       initialCountryCode: 'BD',
+      initialValue: initialValue,
       onChanged: (phone) {
         onChanged?.call(phone);
         // controller?.text = phone.completeNumber;

@@ -11,6 +11,7 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,24 +27,38 @@ class HomeView extends GetView<HomeController> {
             SizedBox(
               height: 20.h,
             ),
-            _infoCard(icon: Icons.person_outline, value: "Name"),
-            _infoCard(icon: Icons.phone_android, value: "+8801688035441"),
-            _infoCard(icon: Icons.email_outlined, value: "f.a.chowdhury@hotmail.com"),
+            Obx(
+              () => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _infoCard(icon: Icons.person_outline, value: controller.name.value),
+                  _infoCard(icon: Icons.phone_android, value: controller.phone.value),
+                  _infoCard(icon: Icons.email_outlined, value: controller.email.value),
+                ],
+              ),
+            ),
             SizedBox(
               height: 12.h,
             ),
             SettingCard(
-              onTap: () {
-                Get.toNamed(Routes.UPDATE);
+              onTap: () async {
+                bool update = await Get.toNamed(Routes.UPDATE);
+                if (update) {
+                  controller.getUser();
+                }
               },
               title: "Update Information",
             ),
             SettingCard(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(Routes.CHANGE_PASSWORD);
+              },
               title: "Change Password",
             ),
             SettingCard(
-              onTap: () {},
+              onTap: () {
+                controller.deleteAccount();
+              },
               title: "Delete Account",
             ),
             SettingCard(

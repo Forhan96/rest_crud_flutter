@@ -7,6 +7,7 @@ class TextInput extends StatelessWidget {
   const TextInput({
     super.key,
     this.controller,
+    this.initialValue,
     this.label,
     this.enabled = true,
     this.obscure = false,
@@ -18,6 +19,7 @@ class TextInput extends StatelessWidget {
   });
 
   final TextEditingController? controller;
+  final String? initialValue;
   final String? label;
   final String? hintText;
   final bool enabled;
@@ -31,6 +33,7 @@ class TextInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      initialValue: initialValue,
       validator: validator,
       style: const TextStyle(
         fontSize: 16,

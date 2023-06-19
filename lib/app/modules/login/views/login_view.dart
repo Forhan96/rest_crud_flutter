@@ -4,11 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rest_crud_flutter/app/modules/login/model/login.dart';
 import 'package:rest_crud_flutter/app/routes/app_pages.dart';
 import 'package:rest_crud_flutter/app/utils/color_const.dart';
 import 'package:rest_crud_flutter/app/utils/image_const.dart';
 import 'package:rest_crud_flutter/app/utils/input_validator.dart';
-import 'package:rest_crud_flutter/app/widgets/TextInput.dart';
+import 'package:rest_crud_flutter/app/widgets/text_input.dart';
 import 'package:rest_crud_flutter/app/widgets/phone_input.dart';
 
 import '../controllers/login_controller.dart';
@@ -68,24 +69,40 @@ class LoginView extends GetView<LoginController> with InputValidationMixin {
                       controller: passwordController,
                       hintText: "Password",
                       validator: (password) {
-                        if (isPasswordValid(password ?? "")) {
+                        if (isNotEmpty(password ?? "")) {
                           return null;
                         } else {
-                          return 'Use uppercase, lowecase, digits & special characters';
+                          return 'Enter valid password';
                         }
                       },
+                      // validator: (password) {
+                      //   if (isPasswordValid(password ?? "")) {
+                      //     return null;
+                      //   } else {
+                      //     return 'Use uppercase, lowecase, digits & special characters';
+                      //   }
+                      // },
                       obscure: true,
                     ),
                     SizedBox(
                       height: 30.h,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (!formKey.currentState!.validate()) {
                           return;
                         }
-                        controller.login();
-                        Get.offNamedUntil(Routes.HOME, (route) => false);
+                        // Login login = Login(
+                        //   email: emailController.text,
+                        //   password: passwordController.text,
+                        // );
+
+                        Map<String, String> body = {
+                          "email": emailController.text,
+                          "password": passwordController.text,
+                        };
+                        await controller.login(body);
+                        // Get.offNamedUntil(Routes.HOME, (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,

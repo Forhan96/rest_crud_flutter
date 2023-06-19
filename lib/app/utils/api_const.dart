@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const BASE_URL = "http://testapi.alifouad91.com/api";
+  static const BASE_URL = "https://testapi.alifouad91.com/api";
 
   static const SIGN_UP = "/user/register";
   static const LOGIN = "/login";

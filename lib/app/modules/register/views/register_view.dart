@@ -13,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rest_crud_flutter/app/routes/app_pages.dart';
 import 'package:rest_crud_flutter/app/utils/color_const.dart';
 import 'package:rest_crud_flutter/app/utils/image_const.dart';
-import 'package:rest_crud_flutter/app/widgets/TextInput.dart';
+import 'package:rest_crud_flutter/app/widgets/text_input.dart';
 
 class RegisterView extends GetView<RegisterController> with InputValidationMixin {
   const RegisterView({Key? key}) : super(key: key);
@@ -132,11 +132,21 @@ class RegisterView extends GetView<RegisterController> with InputValidationMixin
                     height: 30.h,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (!formKey.currentState!.validate()) {
                         return;
                       }
-                      Get.offNamedUntil(Routes.HOME, (route) => false);
+
+                      Map<String, String> body = {
+                        "name": nameController.text,
+                        "email": emailController.text,
+                        "phone": phoneController.text,
+                        "country_code": countryCodeController.text,
+                        "password": passwordController.text,
+                        "password_confirm": confirmPasswordController.text,
+                      };
+                      await controller.signUp(body);
+                      // Get.offNamedUntil(Routes.HOME, (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,

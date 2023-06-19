@@ -1,11 +1,11 @@
-class SignUpResponse {
+class AuthResponse {
   bool? success;
   String? message;
   Data? data;
 
-  SignUpResponse({this.success, this.message, this.data});
+  AuthResponse({this.success, this.message, this.data});
 
-  SignUpResponse.fromJson(Map<String, dynamic> json) {
+  AuthResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
@@ -15,7 +15,7 @@ class SignUpResponse {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     data['message'] = message;
-    if (this.data != null) {
+    if (this.data != null && this.data != []) {
       data['data'] = this.data!.toJson();
     }
     return data;
